@@ -1,34 +1,47 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+using namespace std;
 
 int main() {
-    // Generate a random number between 1 and 100
+    int lowerBound, upperBound;
+    cout << "Enter the lower bound of the range: ";
+    cin >> lowerBound;
+    cout << "Enter the upper bound of the range: ";
+    cin >> upperBound;
+
+    // Validate the range
+    if (upperBound <= lowerBound) {
+        cout << "Invalid range. Upper bound must be greater than lower bound.\n";
+        return 1;
+    }
+
+    // Generate a random number within the specified range
     srand(time(0));
-    int randomNumber = rand() % 100 + 1;
-    
+    int randomNumber = rand() % (upperBound - lowerBound + 1) + lowerBound;
+
     int userGuess;
     int attempts = 0;
 
-    std::cout << "Welcome to the Number Guessing Game!\n";
-    std::cout << "Guess a number between 1 and 100:\n";
+    cout << "Welcome to the Number Guessing Game!\n";
+    cout << "Guess a number between " << lowerBound << " and " << upperBound << ":\n";
 
     do {
-        std::cout << "Enter your guess: ";
-        std::cin >> userGuess;
+        cout << "Enter your guess: ";
+        cin >> userGuess;
         attempts++;
 
         if (userGuess == randomNumber) {
-            std::cout << "Congratulations! You guessed the correct number (" << randomNumber << ")!\n";
+            cout << "Congratulations! You guessed the correct number (" << randomNumber << ")!\n";
             break;
         } else if (userGuess < randomNumber) {
-            std::cout << "Too low! Try again.\n";
+            cout << "Too low! Try again.\n";
         } else {
-            std::cout << "Too high! Try again.\n";
+            cout << "Too high! Try again.\n";
         }
     } while (true);
 
-    std::cout << "Number of attempts: " << attempts << std::endl;
+    cout << "Number of attempts: " << attempts << endl;
 
     return 0;
 }
